@@ -5,4 +5,13 @@ class Dev < ActiveRecord::Base
   def received_one?(item_name)
     self.freebies.map { |freebie| freebie.item_name }.include?(item_name)
   end
+
+  def give_away(dev, freebie)
+    if self.freebies.include?(freebie)
+      freebie.dev_id = dev.id
+      freebie.save
+    else
+      "You don't own that Freebie!"
+    end
+  end
 end
