@@ -10,4 +10,10 @@ class Company < ActiveRecord::Base
       dev_id: dev.id
     )
   end
+
+  def self.oldest_company
+    year = Company.minimum(:founding_year)
+    Company.find_by(founding_year: year)
+    # Company.where(founding_year: year)
+  end
 end
