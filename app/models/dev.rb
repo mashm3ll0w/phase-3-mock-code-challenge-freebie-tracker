@@ -7,9 +7,12 @@ class Dev < ActiveRecord::Base
   end
 
   def give_away(dev, freebie)
-    if self.freebies.include?(freebie)
+    if dev == self
+      "You can't give yourself a Freebie!"
+    elsif self.freebies.include?(freebie)
       freebie.dev_id = dev.id
       freebie.save
+      "Given the #{freebie.item_name} to #{dev.name}!"
     else
       "You don't own that Freebie!"
     end
